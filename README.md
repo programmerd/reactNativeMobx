@@ -37,3 +37,7 @@ react-native之MOBX的使用
         import {observer} from 'mobx-react/native'
 
 * 这样就可以使用修饰符@了 如@observable youStateName="数据"
+
+
+### 使用MOBX
+>>>>>>> dev
