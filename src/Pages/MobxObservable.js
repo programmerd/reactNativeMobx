@@ -22,11 +22,11 @@ export default class MobxObservable extends Component<{}> {
   }
 
   _onChangePrice = (val) =>{
-    this.props.store.MobxStore.price=val
+    this.props.store.MobxStore.price = val
   }
 
   _onChangeAmount = (val) =>{
-    this.props.store.MobxStore.amount=val
+    this.props.store.MobxStore.amount = val
   }
 
   render() {
