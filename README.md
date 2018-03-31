@@ -60,7 +60,7 @@ react-native之MOBX的使用
 
 >在子组件中MobxObservable.js中使用 @inject('store') 将store作为props传递给子组件,通过this.props可以拿到Store的被观察者变量
 
-        const {price,amount} = this.props.store.MobxStore
+        const {price, amount} = this.props.store.MobxStore
 
 >在子组件中MobxObservable.js可以通过观察者@observer 监听组件被观察者变量是否变化 如果被观察者发生改变@observer监听的组件将重新render
 
@@ -70,8 +70,7 @@ react-native之MOBX的使用
 
            //在Mobx中可以利用@computed 当被观察者状态发生改变时 进行想要的计算 返回true时 组件重新render
            @computed get total(){
-                 const {price} = this.props.store.MobxStore
-                 const {amount} = this.props.store.MobxStore
+                 const {price, amount} = this.props.store.MobxStore
                 return price*amount
            }
 
