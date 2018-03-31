@@ -46,11 +46,11 @@ react-native之MOBX的使用
 
 
 ## 使用MOBX
-* 首先需要创建一个用于存储数据的Store 在Store内使用@observable 定义被观察者
+* 首先需要创建一个用于存储数据的Store 在Store内使用@observable 定义被观察者变量
 > MobxStore.js
 
-        @observable price=0
-        @observable amount=0
+        @observable price = 0
+        @observable amount = 0
 
 >在App.js中 使用<Provider store={Store定义的被观察者}> 根据上下文Provider可以传递Store给子组件
 
@@ -71,7 +71,7 @@ react-native之MOBX的使用
            //在Mobx中可以利用@computed 当被观察者状态发生改变时 进行想要的计算 返回true时 组件重新render
            @computed get total(){
                  const {price, amount} = this.props.store.MobxStore
-                return price*amount
+                 return price*amount
            }
 
            render(){
