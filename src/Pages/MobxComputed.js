@@ -25,8 +25,8 @@ export default class MobxComputed extends Component<{}> {
       <View>
         <Text>computed计算后的变化</Text>
         <TextInput
-          value={this.num}
-          onChangeText={this._onChange}
+          value = {this.num}
+          onChangeText = {this._onChange}
         />
         <Text>{this.onCase?this.num:"没变化"}</Text>
       </View>
