@@ -12,9 +12,9 @@ import {
   View
 } from 'react-native';
 import {Provider} from 'mobx-react/native'
-import {initStore} from './Mobx/Store/index'
-import MobxObservable from './Mobx/MobxObservable'
-import MobxComputed from './Mobx/MobxComputed'
+import {initStore} from './src/Store/index'
+import MobxObservable from './src/Pages/MobxObservable'
+import MobxComputed from './src/Pages/MobxComputed'
 
 export default class App extends Component<{}> {
   render() {

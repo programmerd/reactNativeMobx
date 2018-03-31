@@ -12,14 +12,12 @@ import {observer,inject,Provider} from 'mobx-react/native'
 export default class MobxObservable extends Component<{}> {
 
   @computed get total(){
-    const {price}=this.props.store.MobxStore
-    const {amount}=this.props.store.MobxStore
+    const {price, amount} = this.props.store.MobxStore
     return parseInt(price) * parseInt(amount)
   }
 
   @computed get totalGT100(){
-    const {price} = this.props.store.MobxStore
-    const {amount} = this.props.store.MobxStore
+    const {price, amount} = this.props.store.MobxStore
     return (parseInt(price) * parseInt(amount))>100
   }
 
@@ -32,8 +30,7 @@ export default class MobxObservable extends Component<{}> {
   }
 
   render() {
-    const {price} = this.props.store.MobxStore;
-    const {amount} = this.props.store.MobxStore;
+    const {price, amount} = this.props.store.MobxStore;
     return (
       <View>
         <Text>单价(个)：</Text>
