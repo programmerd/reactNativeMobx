@@ -33,7 +33,7 @@ export default class MobxComputed extends Component<{}> {
         <Text>{onChange}</Text>
         <Text>{computed.get()}</Text>
         <Text>total: {totals}</Text>
-        <Button title="+1" onPress={this._onPress}></Button>
+        <Button title = "+1" onPress = {this._onPress}></Button>
       </View>
     )
   }

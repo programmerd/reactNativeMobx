@@ -159,7 +159,7 @@ react-native之MOBX的使用
           };
 
 
->>@action(name) 支持在后面添加一个那么属性 是指更好的说明@action的意图 上面可以写成:
+>@action(name) 支持在后面添加一个那么属性 是指更好的说明@action的意图 上面可以写成:
 
          @action('向数组中push元素的动作') _addPush = () => {
                this.props.store.MobxStore.example += 1;

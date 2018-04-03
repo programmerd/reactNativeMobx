@@ -40,7 +40,7 @@ export default class MobxObservable extends Component<{}> {
         />
         <Text>  数量(元)：</Text>
         <TextInput
-          value={amount}
+          value = {amount}
           onChangeText = {this._onChangeAmount}
         />
         <Text>总计：{this.total}</Text>
