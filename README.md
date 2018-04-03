@@ -113,8 +113,8 @@ react-native之MOBX的使用
                 <Text>{computed.get()}</Text>
               </View>
             )
->> *  computed 中有getter与setter方法  这种使用getter、setter方法定义的属性为'存储器属性' 具体介绍[getter与setter](https://segmentfault.com/a/1190000011760834)
->>> 在MobxStore.js中定义 computed 的 get 与 set 方法(永远在getter之后定义setter)
+> *  computed 中有getter与setter方法  这种使用getter、setter方法定义的属性为'存储器属性' 具体介绍[getter与setter](https://segmentfault.com/a/1190000011760834)
+>> 在MobxStore.js中定义 computed 的 get 与 set 方法(永远在getter之后定义setter)
 
         @computed get totals() {
             return this.total ? this.total : 0;
@@ -125,7 +125,7 @@ react-native之MOBX的使用
             this.total = val;
           }
 
->>>在MobxComputed.js 中对totals进行赋值操作，
+>> 在MobxComputed.js 中对totals进行赋值操作，
 
         _onPress = () => {
         //"存储器属性" 在setter中赋值 相当与将值存储到totals上 totals又将值赋给了total
@@ -134,3 +134,54 @@ react-native之MOBX的使用
          //操作
          <Text>total: {totals}</Text>
          <Button title="+1" onPress={this._onPress}></Button>
+
+* action对任意修改该过@observable或改变状态的时候使用的函数@action 在启用严格模式(useStrict)的时候 强制使用action
+> 在MobxStore.js中定义一个数组 arrList 定义一个变量example 在使用computed对其进行getter与setter
+
+         @observable example = 0;
+
+         @observable arrList = [1,2,3];
+
+         @computed get addData(){
+             return this.arrList.length
+           }
+           set addData(val){
+             this.arrList.push(val);
+           }
+
+>在MobxAction.js 改变arrList与example的状态 在改变状态前加@action(标记出修改状态 动作所在的位置)
+
+        ......
+        //使用@action标记处修改状态是所在的位置
+         @action _addPush = () => {
+              this.props.store.MobxStore.example += 1;
+              this.props.store.MobxStore.addData += 1;
+          };
+
+
+>>@action(name) 支持在后面添加一个那么属性 是指更好的说明@action的意图 上面可以写成:
+
+         @action('向数组中push元素的动作') _addPush = () => {
+               this.props.store.MobxStore.example += 1;
+               this.props.store.MobxStore.addData += 1;
+           };
+         .......
+
+         render(){
+              const {example,arrList,addData} = this.props.store.MobxStore;
+              //这里想打印出arrList的数组内容需要对数组进行slice(0)浅拷贝一个新的数组
+              //因为@observable 会自动将数组变成一个可观察的observable数组 直接打印或取值是拿不到的，
+              //或者可以在定义的时候就禁止自动将其转换为observable类型 只需要在@observable后面添加ref属性即可
+              //如@abservable.ref arr=[1,2,3]  这样的话就可以向普通数组一样进行操作
+              console.log(arrList.slice())
+              return (
+                <View>
+                  <Button
+                    title = "向数组中push元素"
+                    onPress = {this._addPush}
+                  />
+                  <Text>被点击了：{example}次</Text>
+                  <Text>数组的长度：{addData}</Text>
+                </View>
+              )
+          }
