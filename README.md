@@ -113,6 +113,24 @@ react-native之MOBX的使用
                 <Text>{computed.get()}</Text>
               </View>
             )
+>> *  computed 中有getter与setter方法  这种使用getter、setter方法定义的属性为'存储器属性' 具体介绍[getter与setter](https://segmentfault.com/a/1190000011760834)
+>>> 在MobxStore.js中定义 computed 的 get 与 set 方法(永远在getter之后定义setter)
 
+        @computed get totals() {
+            return this.total ? this.total : 0;
+          }
 
+          set totals(val){
+            console.log('setter: '+val);
+            this.total = val;
+          }
 
+>>>在MobxComputed.js 中对totals进行赋值操作，
+
+        _onPress = () => {
+        //"存储器属性" 在setter中赋值 相当与将值存储到totals上 totals又将值赋给了total
+            this.props.store.MobxStore.totals += 1;
+          }
+         //操作
+         <Text>total: {totals}</Text>
+         <Button title="+1" onPress={this._onPress}></Button>

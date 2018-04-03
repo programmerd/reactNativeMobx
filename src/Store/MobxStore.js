@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {observable,computed} from 'mobx'
+import {observable,computed, action} from 'mobx'
 
 export default class MobxStore extends Component<{}>{
 
@@ -9,8 +9,20 @@ export default class MobxStore extends Component<{}>{
 
   @observable num = '1';
 
+  @observable totals = 0;
+
   @computed get onChange(){
+    console.log("getter");
     return parseInt(this.num) * parseInt(this.num)
+  }
+
+  @computed get total() {
+    return this.totals ? this.totals : 0;
+  }
+
+  set total1(val){
+    console.log('setter: '+val);
+    this.total = val;
   }
 
   computed = computed(() => {
