@@ -68,7 +68,7 @@ react-native之MOBX的使用
         @observer
         class MobxObservable extends Component<{}>{
 
-           //在Mobx中可以利用@computed 当被观察者状态发生改变时 进行想要的计算 返回true时 组件重新render
+           //在Mobx中可以利用@computed 当被观察者状态发生改变时 进行想要的计算 组件重新render
            @computed get total(){
                  const {price, amount} = this.props.store.MobxStore
                  return price*amount
@@ -81,4 +81,38 @@ react-native之MOBX的使用
                 )
            }
         }
+
+* computed 可以返回一个新的计算后的值，修饰符下的 @computed 与无修饰符下的 computed
+
+> MobxStore.js中定义被观察者num 并且使用compute返回计算后的新值
+
+        @observable num = "1"
+        //使用修饰符下的computed
+        @ computed get onChange(){
+            // 返回 num 输入值 相乘的结果
+            return parseInt(this.num) * parseInt(this.num)
+        }
+        // 不使用修饰符下的computed
+        computed = computed(() => {
+            return parseInt(this.num)>4?"大于4":"小于4"
+        })
+
+> MobxComputed.js 通过this.props.store ...去调用
+
+         const {num, onChange,computed} = this.props.store.MobxStore;
+            return (
+              <View>
+                <Text>computed计算后的变化</Text>
+                <TextInput
+                  value = {num}
+                  onChangeText = {this._onChange}
+                />
+                //修饰符下@computed的调用
+                <Text>{onChange}</Text>
+                //无修饰符先computed()下的调用
+                <Text>{computed.get()}</Text>
+              </View>
+            )
+
+
 
