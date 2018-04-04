@@ -13,8 +13,8 @@ import {observer,inject,Provider} from 'mobx-react/native'
 export default class MobxAction extends Component<{}>{
 
   @action('点击按钮改变状态') _addPush = () => {
-      this.props.store.MobxStore.example += 1;
-      this.props.store.MobxStore.addData += 1;
+    this.props.store.MobxStore.example += 1;
+    this.props.store.MobxStore.addData += 1;
   };
 
   render(){

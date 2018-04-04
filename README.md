@@ -185,3 +185,29 @@ react-native之MOBX的使用
                 </View>
               )
           }
+
+*不要拷贝 observables 属性并存储到本地
+> Observer组件只会追踪在 render 方法中存储的数据 ,常见的错误是从observable 属性中提取数据并存储 ，这样存储的起来的数据就不是observable了，它只是引用observable的变量，但是变量(引用)本身并不是可观察的
+>> 例如将MobxAction.js 中的
+
+        @action('向数组中push元素的动作') _addPush = () => {
+                this.props.store.MobxStore.example += 1;
+                this.props.store.MobxStore.addData += 1;
+           };
+
+>> 变成
+
+        @action('向数组中push元素的动作') _addPush = () => {
+                let {example,addData} = this.props.store.MobxStore;
+                    example += 1;
+                    addData += 1;
+           };
+
+>> 上面的代码不会报错 但是不会修改状态 也就是没有监听到observable 的改变 不会从新render页面
+
+>正确的方法通过不将 observables 的值存储在本地(上面第一种就是不存储在本地直接使用)
+>或 通过将其定义为计算属性computed(上面写过的所有computed都是案例)
+
+
+
+
